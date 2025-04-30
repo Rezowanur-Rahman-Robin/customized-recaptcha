@@ -18,6 +18,7 @@ interface ResultScreenProps {
   passed: boolean;
   attempts: number;
   maxAttempts: number;
+  mistakeCount: number;
   onRetry: () => void;
 }
 
@@ -28,6 +29,7 @@ export const ResultScreen: React.FC<ResultScreenProps> = ({
   passed,
   attempts,
   maxAttempts,
+  mistakeCount,
   onRetry
 }) => {
   // Calculate remaining attempts
@@ -53,7 +55,7 @@ export const ResultScreen: React.FC<ResultScreenProps> = ({
           
           <p className="text-green-600 font-medium mb-2">Verification Successful</p>
           <p className="text-sm text-gray-600 mb-4">
-            You have successfully completed the CAPTCHA verification.
+            You have successfully completed the CAPTCHA verification{mistakeCount>0 ? ` with ${mistakeCount} ${mistakeCount===1? 'mistake': 'mistakes'}` : ''}.
           </p>
         </div>
       ) : (

@@ -51,6 +51,7 @@ const CaptchaComponent: React.FC = () => {
   const [attempts, setAttempts] = useState<number>(0);
   const [passed, setPassed] = useState<boolean>(false);
   const [tolerance,setTolerance] = useState<number>(FAULT_TOLERANCE);
+  const [mistakeCount,setMistakeCount] = useState<number>(0)
   
   const webcamRef = useRef<Webcam>(null);
 
@@ -187,6 +188,7 @@ const CaptchaComponent: React.FC = () => {
     // Check if passed within tolerance
     const hasPassed = totalMistakes <= tolerance;
     setPassed(hasPassed);
+    setMistakeCount(totalMistakes)
     
     // Move to result step
     setCurrentStep(CaptchaStep.RESULT);
@@ -271,6 +273,7 @@ const CaptchaComponent: React.FC = () => {
           passed={passed}
           attempts={attempts}
           maxAttempts={maxAttempts}
+          mistakeCount={mistakeCount}
           onRetry={handleRetry}
         />
       )}
